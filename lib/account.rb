@@ -8,6 +8,7 @@ class Account
 
   def make_a_deposit(money)
     @balance += money
+    @statement.push("#{Time.now.strftime('%x')}||" + " #{money}||" + " ||" + " #{@balance}")
   end
 
   def make_a_withdrawal(money)

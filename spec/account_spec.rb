@@ -1,7 +1,6 @@
 require 'account'
 
 describe Account do
-
   it 'has balance of zero' do
     expect(subject.balance).to eq 0
   end
@@ -16,6 +15,10 @@ describe Account do
     it 'increases the balance by the deposit made' do
       expect { subject.make_a_deposit 1 }.to change { subject.balance }.by 1
     end
+
+    it "adds transaction to statement" do
+      expect(subject.make_a_deposit 1).to eq ["#{Time.now.strftime('%x')}||" + " 1||" + " ||" + " 1"]
+    end
   end
 
   describe '#make_a_withdrawal' do
@@ -28,7 +31,8 @@ describe Account do
 
     it 'deduces money' do
       subject.make_a_deposit(1)
-      expect { subject.make_a_withdrawal 1 }.to change { subject.balance }.by(-1)
+      expect { subject.make_a_withdrawal 1 }
+        .to change { subject.balance }.by(-1)
     end
   end
 end
