@@ -10,5 +10,6 @@ class Account
   end
 
   def make_a_withdrawal(money)
+    @balance -= money
   end
 end
