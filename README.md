@@ -18,6 +18,10 @@ So I can withdraw money from my bank account
 I want to make a withdrawal
 
 As a Client
+So I do not go into my overdraft
+I cannot withdraw more money than I have in my bank account
+
+As a Client
 So I can see when I made a withdrawal
 I want to see the date of the withdrawal
 
