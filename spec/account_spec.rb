@@ -13,12 +13,12 @@ describe Account do
     it { is_expected.to respond_to(:make_a_deposit).with(1).argument }
 
     it 'increases the balance by the deposit made' do
-      expect { subject.make_a_deposit 1 }.to change { subject.balance }.by 1
+      expect { subject.make_a_deposit(1) }.to change { subject.balance }.by 1
     end
 
     it 'adds transaction to statement' do
-      expect(subject.make_a_deposit 1)
-        .to eq ["#{Time.now.strftime('%x')}||" + " 1||" + " ||" + " 1"]
+      expect(subject.make_a_deposit(1))
+        .to eq ["#{Time.now.strftime('%x')}|| 1|| ||1"]
     end
   end
 
@@ -32,15 +32,15 @@ describe Account do
 
     it 'deduces money' do
       subject.make_a_deposit(1)
-      expect { subject.make_a_withdrawal 1 }
+      expect { subject.make_a_withdrawal(1) }
         .to change { subject.balance }.by(-1)
     end
 
     it 'adds transaction to statement' do
       subject.make_a_deposit(1)
-      expect(subject.make_a_withdrawal 1)
-        .to eq ["#{Time.now.strftime('%x')}||" + " 1||" + " ||" + " 1",
-          "#{Time.now.strftime('%x')}||" + " ||" + " 1||" + " 0"]
+      expect(subject.make_a_withdrawal(1))
+        .to eq ["#{Time.now.strftime('%x')}|| 1|| ||1",
+                "#{Time.now.strftime('%x')}|| || 1||0"]
     end
   end
 end
