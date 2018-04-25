@@ -16,8 +16,9 @@ describe Account do
       expect { subject.make_a_deposit 1 }.to change { subject.balance }.by 1
     end
 
-    it "adds transaction to statement" do
-      expect(subject.make_a_deposit 1).to eq ["#{Time.now.strftime('%x')}||" + " 1||" + " ||" + " 1"]
+    it 'adds transaction to statement' do
+      expect(subject.make_a_deposit 1)
+        .to eq ["#{Time.now.strftime('%x')}||" + " 1||" + " ||" + " 1"]
     end
   end
 
@@ -33,6 +34,13 @@ describe Account do
       subject.make_a_deposit(1)
       expect { subject.make_a_withdrawal 1 }
         .to change { subject.balance }.by(-1)
+    end
+
+    it 'adds transaction to statement' do
+      subject.make_a_deposit(1)
+      expect(subject.make_a_withdrawal 1)
+        .to eq ["#{Time.now.strftime('%x')}||" + " 1||" + " ||" + " 1",
+          "#{Time.now.strftime('%x')}||" + " ||" + " 1||" + " 0"]
     end
   end
 end

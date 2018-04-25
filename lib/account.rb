@@ -14,5 +14,6 @@ class Account
   def make_a_withdrawal(money)
     raise 'Insufficient funds' if money > @balance
     @balance -= money
+    @statement.push("#{Time.now.strftime('%x')}||" + " ||" + " #{money}||" + " #{@balance}")
   end
 end
