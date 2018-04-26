@@ -1,27 +1,18 @@
-require_relative './statement_printer'
-
 class Account
-  attr_reader :balance, :statement, :statement_printer
+  attr_reader :balance, :statement
 
-  def initialize(statement_printer = StatementPrinter.new)
-    @statement_printer = statement_printer
+  def initialize
     @statement = []
     @balance = 0
+    @time = Time.now.strftime('%x')
   end
 
   def make_a_deposit(money)
-    @balance += money
-    @statement.push("#{Time.now.strftime('%x')}|| #{money}|| ||#{@balance}")
+    @statement.push("#{@time}|| #{money}|| ||#{@balance += money}")
   end
 
   def make_a_withdrawal(money)
     raise 'Insufficient funds' if money > @balance
-    @balance -= money
-    @statement.push("#{Time.now.strftime('%x')}|| || #{money}||#{@balance}")
-  end
-
-  def print
-    @statement_printer.print_header
-    @statement_printer.print_transaction_history(statement)
+    @statement.push("#{@time}|| || #{money}||#{@balance -= money}")
   end
 end
