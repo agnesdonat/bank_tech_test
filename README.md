@@ -80,4 +80,4 @@ I want to see my bank statement
 
 ## Screenshot ##
 
-![Alt text](/screenshot/Screen Shot 2018-04-26 at 16.37.37.png)
+![Alt text](/screenshot/ScreenShot2018-04-26at16.37.37.png)
